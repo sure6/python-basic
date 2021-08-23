@@ -4,6 +4,7 @@ date: 2021/8/23 15:00
 author: lee sure
 """
 import copy
+import functools
 import json
 
 
@@ -100,6 +101,38 @@ def json2dict():
     dict2=json.loads(str_json)
     print(type(dict2), dict2)
 
+def func_program():
+    # map() 函数的功能是对可迭代对象中的每个元素，都调用指定的函数，并返回一个 map 对象。
+    list1=[1,2,3,4,5]
+    list2=[3,4,5,6,7]
+    a=map(lambda x,y:x+y, list1, list2)
+    b=[i for i in a]
+    print(b)
+    #filter() 函数的功能是对 iterable 中的每个元素，都使用 function 函数判断，并返回 True 或者 False，最后将返回 True 的元素组成一个新的可遍历的集合。
+    c=filter(lambda x:x%2==0,list1)
+    c = [i for i in c]
+    print(c)
+
+    new_list = map(lambda x, y: x - y > 0, [3, 5, 6], [1, 5, 8])
+    print(list(new_list))
+
+    # reduce() 函数通常用来对一个集合做一些累积操作
+    reduce=functools.reduce(lambda x,y:x*y, list1)
+    print(reduce)
+
+u="external variable"
+def variable_scope(p):
+    # 注意，在使用 global 关键字修饰变量名时，不能直接给变量赋初值，否则会引发语法错误。global无法对参数进行修饰
+    global t
+    t="inner variable"
+    # globals() 函数为 Python 的内置函数，它可以返回一个包含全局范围内所有变量的字典，该字典中的每个键值对，键为变量名，值为该变量的值。
+    print(globals())
+    # 一个包含当前作用域内所有变量的字典。这里所谓的“当前作用域”指的是，在函数内部调用 locals() 函数，会获得包含所有局部变量的字典；而在全局范文内调用 locals() 函数，其功能和 globals() 函数相同。
+    print(locals())
+    print(t,u,p)
+    #  vars() 函数也是 Python 内置函数，其功能是返回一个指定 object 对象范围内所有变量组成的字典。如果不传入object 参数，vars() 和 locals() 的作用完全相同。
+
+
 if __name__=="__main__":
     # any_all()
 
@@ -114,4 +147,12 @@ if __name__=="__main__":
 
     # diff_sort_sorted()
 
-    json2dict()
+    # json2dict()
+
+    # func_program()
+
+    variable_scope("parameters")
+    print(u)
+    # print(p)
+    print(t)
+    # print(globals())
